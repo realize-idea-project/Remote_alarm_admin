@@ -16,9 +16,15 @@ export const Schedule = () => {
   };
 
   const applyAlarm = () => {
-    const stringify = JSON.stringify(scheduleList);
-    const date = new Date().getDate();
-    setData(date, stringify);
+    try {
+      const stringify = JSON.stringify(scheduleList);
+      const date = new Date().getDate();
+      setData(date, stringify);
+      alert("알림이 갱신되었습니다.");
+    } catch (err) {
+      console.error(err);
+      alert("알림 갱신에 실패하였습니다.");
+    }
   };
 
   return (
