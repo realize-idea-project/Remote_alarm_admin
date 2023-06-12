@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { db } from "./firebase";
 
-export const useFB = () => {
+export const useRealTimeDB = () => {
   const id = 1;
   const realTime = db.ref(`company/company_${id}`);
 
-  useEffect(() => {
-    realTime.on("value", (snapshot) => {
-      const data = snapshot.val();
-      console.log("data!!", data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   realTime.on("value", (snapshot) => {
+  //     const data = snapshot.val();
+  //     console.log("data!!", data);
+  //   });
+  // }, []);
 
   const getData = async (date: number) => {
     const snapshot = await realTime.get();
