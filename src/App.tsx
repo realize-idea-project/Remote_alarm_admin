@@ -11,13 +11,18 @@ function App() {
   };
 
   const handleSet = () => {
-    const date = new Date().getDate();
-    setData(date, "14:33,16:36,18:00");
+    try {
+      const date = new Date().getDate();
+      setData(date, "14:33,16:36,18:00");
+      alert("알림이 갱신되었습니다.");
+    } catch (err) {
+      console.error(err);
+      alert("알림 갱신에 실패하였습니다.");
+    }
   };
 
   return (
     <div className="App">
-      {/* <Schedule onSubmit={() => {}} /> */}
       <button onClick={handleClick}>get</button>
       <button onClick={handleSet}>set</button>
     </div>
