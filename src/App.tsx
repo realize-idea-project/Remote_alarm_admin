@@ -1,9 +1,9 @@
 import React from "react";
-import "./App.css";
-import { useFB } from "./useFB";
+import { useRealTimeDB } from "./firebase/useRealTimeDB";
+import { Schedule } from "./Schedule/Schedule";
 
 function App() {
-  const { getData, setData } = useFB();
+  const { getData, setData } = useRealTimeDB();
 
   const handleClick = async () => {
     const date = new Date().getDate();
@@ -17,6 +17,7 @@ function App() {
 
   return (
     <div className="App">
+      {/* <Schedule onSubmit={() => {}} /> */}
       <button onClick={handleClick}>get</button>
       <button onClick={handleSet}>set</button>
     </div>
