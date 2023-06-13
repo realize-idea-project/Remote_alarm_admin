@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import _ from "lodash";
 import { ScheduleInput } from "./ScheduleInput";
 import { ScheduleList } from "./ScheduleList";
@@ -7,17 +7,8 @@ import { useRealTimeDB } from "../firebase/useRealTimeDB";
 import { styled } from "styled-components";
 
 export const Schedule = () => {
-  const { setData, getData } = useRealTimeDB();
+  const { setData } = useRealTimeDB();
   const [scheduleList, setScheduleList] = useState<ISchedule[]>([]);
-
-  useEffect(() => {
-    getData().then((res) => {
-      const date = new Date().getDate();
-      const currentSchedule = res[date];
-      const parsed = JSON.parse(currentSchedule);
-      setScheduleList(parsed);
-    });
-  }, []);
 
   const addSchedule = (schdl: ISchedule) => {
     const newSchedule = [...scheduleList, schdl];
