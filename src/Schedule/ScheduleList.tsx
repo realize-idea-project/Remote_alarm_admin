@@ -7,9 +7,14 @@ import { styled } from "styled-components";
 
 interface Props {
   list: ISchedule[];
+  onSelect: (schedule: ISchedule) => void;
 }
 
-export const ScheduleList: FC<Props> = ({ list }) => {
+export const ScheduleList: FC<Props> = ({ list, onSelect }) => {
+  const handleSelect = (schedule: ISchedule) => {
+    onSelect(schedule);
+  };
+
   if (_.isEmpty(list)) return null;
   return (
     <Container>
@@ -17,16 +22,16 @@ export const ScheduleList: FC<Props> = ({ list }) => {
       <div style={{ height: "1rem" }} />
 
       <div style={{ height: "1rem" }} />
-      {list.map((schdl, idx) => {
+      {list.map((schedule, idx) => {
         return (
           <ListContainer key={idx}>
-            <EntryContainer>
+            <EntryContainer onClick={() => handleSelect(schedule)}>
               <EntryTitle>{`예약${idx}`}</EntryTitle>
               <Blank />
               <div>
-                <DateInput value={schdl[0]} title="" disabled />
+                <DateInput value={schedule[1]} title="" disabled />
                 <Blank />
-                <DateInput value={schdl[1]} title="" disabled />
+                <DateInput value={schedule[2]} title="" disabled />
               </div>
             </EntryContainer>
           </ListContainer>
@@ -58,7 +63,10 @@ const Blank = styled.div`
 const EntryContainer = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 0.5rem 0rem;
+  padding: 1rem 3rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+  cursor: pointer;
 `;
 
 const EntryTitle = styled.div`

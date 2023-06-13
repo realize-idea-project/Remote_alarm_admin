@@ -9,6 +9,7 @@ import { styled } from "styled-components";
 export const Schedule = () => {
   const { setData, getData } = useRealTimeDB();
   const [scheduleList, setScheduleList] = useState<ISchedule[]>([]);
+  const [selectedSchedule, setSelectedSchedule] = useState<ISchedule>();
 
   useEffect(() => {
     getData().then((res) => {
@@ -19,8 +20,16 @@ export const Schedule = () => {
     });
   }, []);
 
-  const addSchedule = (schdl: ISchedule) => {
-    const newSchedule = [...scheduleList, schdl];
+  const addSchedule = (schedule: ISchedule) => {
+    const newSchedule = [...scheduleList, schedule];
+    setScheduleList(newSchedule);
+  };
+
+  const editSchedule = (schedule: ISchedule) => {
+    const newSchedule = scheduleList.map((schdl) =>
+      schdl[0] === schedule[0] ? schedule : schdl
+    );
+
     setScheduleList(newSchedule);
   };
 
@@ -36,10 +45,23 @@ export const Schedule = () => {
     }
   };
 
+  const selectSchedule = (schedule: ISchedule) => {
+    setSelectedSchedule(schedule);
+  };
+
+  const cancelSelect = () => {
+    setSelectedSchedule(undefined);
+  };
+
   return (
     <Container>
-      <ScheduleList list={scheduleList} />
-      <ScheduleInput onSubmit={addSchedule} />
+      <ScheduleList list={scheduleList} onSelect={selectSchedule} />
+      <ScheduleInput
+        onSubmit={addSchedule}
+        onCancel={cancelSelect}
+        onEdit={editSchedule}
+        selectedSchedule={selectedSchedule}
+      />
       {!_.isEmpty(scheduleList) && (
         <ApplyButton onClick={applyAlarm}>알림 설정하기</ApplyButton>
       )}
