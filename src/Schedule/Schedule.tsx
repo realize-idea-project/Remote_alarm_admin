@@ -10,19 +10,23 @@ export const Schedule = () => {
   const { setData, getData } = useRealTimeDB();
   const [scheduleList, setScheduleList] = useState<ISchedule[]>([]);
   const [selectedSchedule, setSelectedSchedule] = useState<ISchedule>();
+  const [hasChanged, setHasChanged] = useState(false);
 
   useEffect(() => {
     getData().then((res) => {
       const date = new Date().getDate();
       const currentSchedule = res[date];
-      const parsed = JSON.parse(currentSchedule);
-      setScheduleList(parsed);
+      if (!_.isNil(currentSchedule)) {
+        const parsed = JSON.parse(currentSchedule);
+        setScheduleList(parsed);
+      }
     });
   }, []);
 
   const addSchedule = (schedule: ISchedule) => {
     const newSchedule = [...scheduleList, schedule];
     setScheduleList(newSchedule);
+    setHasChanged(true);
   };
 
   const editSchedule = (schedule: ISchedule) => {
@@ -31,6 +35,16 @@ export const Schedule = () => {
     );
 
     setScheduleList(newSchedule);
+    setHasChanged(true);
+  };
+
+  const deleteSchedule = (schedule: ISchedule) => {
+    const newSchedule = scheduleList.filter(
+      (schdl) => schdl[0] !== schedule[0]
+    );
+
+    setScheduleList(newSchedule);
+    setHasChanged(true);
   };
 
   const applyAlarm = () => {
@@ -55,14 +69,18 @@ export const Schedule = () => {
 
   return (
     <Container>
-      <ScheduleList list={scheduleList} onSelect={selectSchedule} />
+      <ScheduleList
+        list={scheduleList}
+        onSelect={selectSchedule}
+        onDelete={deleteSchedule}
+      />
       <ScheduleInput
         onSubmit={addSchedule}
         onCancel={cancelSelect}
         onEdit={editSchedule}
         selectedSchedule={selectedSchedule}
       />
-      {!_.isEmpty(scheduleList) && (
+      {(!_.isEmpty(scheduleList) || hasChanged) && (
         <ApplyButton onClick={applyAlarm}>알림 설정하기</ApplyButton>
       )}
     </Container>
@@ -72,9 +90,9 @@ export const Schedule = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin-top: 4rem;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 `;
 
 const ApplyButton = styled.div`
@@ -83,6 +101,6 @@ const ApplyButton = styled.div`
   display: inline-block;
   padding: 1rem 4rem;
   border-radius: 2rem;
-  margin-top: 4rem;
+  margin-top: 2rem;
   cursor: pointer;
 `;

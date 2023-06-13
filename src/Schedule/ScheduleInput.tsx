@@ -39,6 +39,8 @@ export const ScheduleInput: FC<Props> = ({
     if (!_.isEmpty(schedule[1]) && !_.isEmpty(schedule[2])) {
       onSubmit([schedule[0] || uuidv4(), schedule[1], schedule[2]]);
       setSchedule(INIT);
+    } else {
+      alert("날짜를 선택해주세요");
     }
   };
 
@@ -78,7 +80,6 @@ export const ScheduleInput: FC<Props> = ({
 const Container = styled.div`
   background-color: lightgray;
   padding: 1rem 2rem;
-  display: inline-block;
   border-radius: 1rem;
 `;
 
