@@ -1,5 +1,10 @@
 import React from "react";
+import { styled } from "styled-components";
 
 export const Calendar = () => {
-  return <div>hi</div>;
+  return <Container>hi</Container>;
 };
+
+const Container = styled.div`
+  background-color: aqua;
+`;

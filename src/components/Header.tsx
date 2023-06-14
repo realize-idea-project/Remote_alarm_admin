@@ -27,16 +27,18 @@ export const Header = () => {
 };
 
 const Container = styled.div`
-  height: 3vw;
-  min-height: 40px;
-
   display: flex;
-  padding: 0 3vw;
   align-items: center;
   justify-content: space-between;
 
   border-bottom: 1px solid lightgray;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  width: 100%;
+  height: 3vw;
+  min-height: 40px;
+
+  padding: 0 3vw;
 `;
 
 const Tab = styled.div<{ isActive: boolean }>`
