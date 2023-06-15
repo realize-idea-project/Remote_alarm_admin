@@ -9,6 +9,8 @@ import {
   getDateWithoutUnit,
   getTitleDate,
 } from "./dateUtils";
+import { TileClassNameFunc } from "react-calendar/dist/cjs/shared/types";
+import { colorSaturdayBlue } from "./calendarStyling";
 
 export const CustomCalendar = () => {
   const [date, setDate] = useState(new Date());
@@ -36,8 +38,23 @@ export const CustomCalendar = () => {
     setDate(prevMonth);
   };
 
+  const applyClassNameOnTarget: TileClassNameFunc = ({ date }) => {
+    return colorSaturdayBlue(date);
+  };
+
+  // const tileContent = ({ date, view }: any) => {
+  //   if (view === "month") {
+  //     return (
+  //       <div className="day-header">
+  //         {date.toLocaleDateString("en-US", { weekday: "short" })}
+  //       </div>
+  //     );
+  //   }
+  //   return null;
+  // };
+
   return (
-    <>
+    <Container>
       <Header>
         <Nav onClick={goPrevMonth}>{"<"}</Nav>
         <Title>{getTitleDate(date)}</Title>
@@ -45,21 +62,24 @@ export const CustomCalendar = () => {
       </Header>
       <ReactCalendar
         ref={calendarRef}
-        calendarType="US"
         onChange={handleClickDate}
         value={date}
+        calendarType="US"
         locale="ko-KR"
         nextLabel={<button disabled />}
         formatDay={getDateWithoutUnit}
         showNavigation={false}
+        tileClassName={applyClassNameOnTarget}
+        // tileContent={tileContent}
       />
-    </>
+    </Container>
   );
 };
 
 const Container = styled.div`
   /* background-color: aqua; */
-  height: 100vh;
+  /* height: 100vh; */
+  margin-top: 1vw;
 `;
 
 const Header = styled.div`
@@ -68,7 +88,8 @@ const Header = styled.div`
   justify-content: center;
   align-items: center;
 
-  margin-bottom: 2vw;
+  margin-bottom: 1vw;
+  background-color: white;
 `;
 
 const Title = styled.div`
