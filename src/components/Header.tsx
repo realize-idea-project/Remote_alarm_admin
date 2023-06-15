@@ -16,7 +16,11 @@ export const Header = () => {
       <div>
         {tabDefine.map((t) => {
           const isSelected = t.id === selectedTab.id;
-          return <Tab isActive={isSelected}>{t.title}</Tab>;
+          return (
+            <Tab key={t.title} isSelected={isSelected}>
+              {t.title}
+            </Tab>
+          );
         })}
       </div>
       <div>
@@ -41,8 +45,9 @@ const Container = styled.div`
   padding: 0 3vw;
 `;
 
-const Tab = styled.div<{ isActive: boolean }>`
-  color: ${({ isActive }) => (isActive ? "blue" : "black")};
+// warning: React does not recognize the `isSelected` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `isselected` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+const Tab = styled.div<{ isSelected: boolean }>`
+  color: ${({ isSelected }) => (isSelected ? "blue" : "black")};
 `;
 
 const Logout = styled.div``;

@@ -1,15 +1,14 @@
 import React from "react";
-import { Header } from "./components/Header";
-import { Schedule } from "./Schedule/Schedule";
-import { Calendar } from "./Calendar";
 import { styled } from "styled-components";
+import { Header } from "./components/Header";
+import { Schedule } from "./Schedule";
 
 export const App = () => {
   return (
     <Container>
       <Header />
       <Content>
-        <Calendar />
+        <Schedule />
       </Content>
     </Container>
   );
