@@ -9,6 +9,7 @@ export enum Colors {
   gray = "#C4C4C4",
   blueMain = "#3478F6",
   bgGray = "#F0F1F4",
+  primary = "#1976d2",
 }
 
 export const Devices = {

@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
-
+import { ThemeProvider } from "styled-components";
 import appRouter from "./routes";
 
+import { theme } from "./constants/styles";
 import "./index.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -16,6 +17,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={appRouter} />
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={appRouter} />
+    </ThemeProvider>
   </React.StrictMode>
 );
