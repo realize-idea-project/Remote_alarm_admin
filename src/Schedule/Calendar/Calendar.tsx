@@ -10,7 +10,6 @@ import {
   getTitleDate,
 } from "./dateUtils";
 import { TileClassNameFunc } from "react-calendar/dist/cjs/shared/types";
-import { colorSaturdayBlue } from "./calendarStyling";
 
 export const CustomCalendar = () => {
   const [date, setDate] = useState(new Date());
@@ -39,19 +38,10 @@ export const CustomCalendar = () => {
   };
 
   const applyClassNameOnTarget: TileClassNameFunc = ({ date }) => {
-    return colorSaturdayBlue(date);
+    if (date.getDay() === 6) {
+      return "saturday";
+    }
   };
-
-  // const tileContent = ({ date, view }: any) => {
-  //   if (view === "month") {
-  //     return (
-  //       <div className="day-header">
-  //         {date.toLocaleDateString("en-US", { weekday: "short" })}
-  //       </div>
-  //     );
-  //   }
-  //   return null;
-  // };
 
   return (
     <Container>
@@ -70,7 +60,6 @@ export const CustomCalendar = () => {
         formatDay={getDateWithoutUnit}
         showNavigation={false}
         tileClassName={applyClassNameOnTarget}
-        // tileContent={tileContent}
       />
     </Container>
   );
