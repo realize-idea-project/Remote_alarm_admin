@@ -3,7 +3,8 @@ export const getDateWithoutUnit = (locale: string | undefined, date: Date) => {
 };
 
 export const getTitleDate = (date: Date) => {
-  const [month, day, year] = date.toLocaleDateString().split("/");
+  const year = date.getFullYear();
+  const month = date.getUTCMonth();
   return `${year}년 ${month}월`;
 };
 
