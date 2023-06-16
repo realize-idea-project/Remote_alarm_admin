@@ -1,23 +1,27 @@
+import { useState } from "react";
+
 export type SelectCount = "first" | "second";
 
 const ITEM = 1;
 const MAX_STACK = 2;
 
 export const useSelectCount = () => {
-  let stack: number[] = [];
+  const [countStack, setCountStack] = useState<number[]>([]);
 
   const add = () => {
-    if (stack.length >= MAX_STACK) return;
-    stack.push(ITEM);
+    if (countStack.length >= MAX_STACK) return;
+    setCountStack((prev) => [...prev, ITEM]);
   };
 
   const pop = () => {
-    if (stack.length <= 0) return;
-    stack.pop();
+    if (countStack.length <= 0) return;
+    const copy = [...countStack];
+    copy.pop();
+    setCountStack(copy);
   };
 
   const clear = () => {
-    stack = [];
+    setCountStack([]);
   };
 
   const getCount = (currentStack: number[]): SelectCount => {
@@ -26,7 +30,7 @@ export const useSelectCount = () => {
   };
 
   return {
-    status: getCount(stack),
+    status: getCount(countStack),
     add,
     pop,
     clear,

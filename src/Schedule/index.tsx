@@ -9,8 +9,8 @@ export const Schedule = () => {
 
   return (
     <Container>
-      {/* <CustomCalendar /> */}
-      <Selector />
+      <CustomCalendar />
+      {/* <Selector /> */}
     </Container>
   );
 };

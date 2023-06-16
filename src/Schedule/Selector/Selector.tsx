@@ -17,11 +17,25 @@ export const Selector = () => {
   const { isSelected, select, unselect } = useSelectStatus(timeTable);
   const { add, pop, clear, status } = useSelectCount();
 
+  const handleSelect = (time: string) => {
+    console.log("status1", status);
+    select(time);
+    add();
+  };
+
+  const handleUnselect = (time: string) => {
+    console.log("status2", status);
+    unselect(time);
+    pop();
+  };
+
   const selectTime = (time: string) => {
     if (isSelected(time)) {
-      unselect(time);
+      console.log("unselect");
+      handleUnselect(time);
     } else {
-      select(time);
+      console.log("select");
+      handleSelect(time);
     }
   };
 
