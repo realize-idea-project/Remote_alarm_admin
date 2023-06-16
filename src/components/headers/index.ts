@@ -1,1 +1,1 @@
-export { HideAppBar } from "./MobileHeader";
+export { SlideUpHeader } from "./SlideUpHeader/SlideUpHeader";

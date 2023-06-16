@@ -4,42 +4,32 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Slide from "@mui/material/Slide";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
+import { BasicDrawer } from "../../drawers/BasicDrawer";
+
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window?: () => Window;
 }
 
-function HideOnScroll(props: any) {
-  const { children, window } = props;
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
+export const SlideUpHeader = ({ window }: Props) => {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   const trigger = useScrollTrigger({
     target: window ? window() : undefined,
-    threshold: 1,
+    threshold: 20,
   });
 
   return (
-    <Slide appear={false} direction="down" in={!trigger}>
-      {children}
-    </Slide>
-  );
-}
-
-export const HideAppBar = (props: Props) => {
-  return (
     <React.Fragment>
       <CssBaseline />
-      <HideOnScroll {...props}>
+      <Slide appear={false} direction="down" in={!trigger}>
         <AppBar
           sx={{
             height: 40,
@@ -53,16 +43,19 @@ export const HideAppBar = (props: Props) => {
               edge="start"
               color="inherit"
               aria-label="menu"
+              onClick={handleDrawerToggle}
             >
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" component="div">
-              Scroll to hide App bar
+              키즈카페 관리자 어플리케이션
             </Typography>
           </Toolbar>
         </AppBar>
-      </HideOnScroll>
+      </Slide>
       <Toolbar />
+
+      <BasicDrawer isOpen={mobileOpen} onClose={handleDrawerToggle} />
     </React.Fragment>
   );
 };
