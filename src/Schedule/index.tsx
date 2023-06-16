@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import { CustomCalendar } from "./Calendar/Calendar";
+import { Selector } from "./Selector/Selector";
+import { TimeGenerator } from "./Selector/timeGenerator";
 
 export const Schedule = () => {
   const [value, onChange] = useState(new Date());
 
   return (
     <Container>
-      <CustomCalendar />
+      {/* <CustomCalendar /> */}
+      <Selector />
     </Container>
   );
 };
 
 const Container = styled.div`
-  background-color: aqua;
+  background-color: #ddd;
   height: 100vh;
 `;
