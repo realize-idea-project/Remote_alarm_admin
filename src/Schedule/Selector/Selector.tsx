@@ -1,14 +1,54 @@
-import React from "react";
 import styled from "styled-components";
-import { TimeGenerator } from "./timeGenerator";
+import { TIME_LIST, timeTable } from "./timeGenerator";
+import { TimeButton } from "./TimeButton";
+import { useSelectCount } from "./useSelectCount";
+import { useSelectStatus } from "./useSelectStatus";
+import { getTimeInYYMM } from "./timeUtils";
 
-const TIME_LIST = new TimeGenerator(9, 24).generate().getList();
+// 첫 시기일때,
+//  눌럿던거 누르면 취소
+//  빈거 누르면 선택
+
+// 둘 시기때,
+//   눌럿던거 누르면 미작동 ( 자기 자신은 취소)
+//   빈거 누르면 선택 > 정렬 > 시기 초기화
 
 export const Selector = () => {
-  return <Container>hi</Container>;
+  const { isSelected, select, unselect } = useSelectStatus(timeTable);
+  const { add, pop, clear, status } = useSelectCount();
+
+  const selectTime = (time: string) => {
+    if (isSelected(time)) {
+      unselect(time);
+    } else {
+      select(time);
+    }
+  };
+
+  return (
+    <Container>
+      {TIME_LIST.map((entry, idx, arr) => {
+        const id = getTimeInYYMM(entry);
+        return (
+          <TimeButton
+            key={id}
+            time={id}
+            isSelected={isSelected(id)}
+            isLast={idx === arr.length - 1}
+            onClick={selectTime}
+          />
+        );
+      })}
+    </Container>
+  );
 };
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+
   background-color: white;
   margin-top: 10vw;
+  padding: 2vw 10vw;
 `;
