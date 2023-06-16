@@ -10,11 +10,14 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
+
+type TabType = "알림 설정";
 
 export const BasicDrawer: React.FC<Props> = ({ isOpen, onClose }) => {
   return (
@@ -29,12 +32,13 @@ export const BasicDrawer: React.FC<Props> = ({ isOpen, onClose }) => {
         <div>
           <Toolbar />
           <Divider />
-          <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+
+          <List sx={{ py: 0 }}>
+            {["알림 설정"].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton sx={{ pr: 5 }}>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <ListItemIcon sx={{ minWidth: 30 }}>
+                    <AccessTimeIcon />
                   </ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItemButton>

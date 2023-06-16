@@ -46,9 +46,11 @@ export const CustomCalendar = () => {
   return (
     <Container>
       <Header>
-        <Nav onClick={goPrevMonth}>{"<"}</Nav>
         <Title>{getTitleDate(date)}</Title>
-        <Nav onClick={goNextMonth}>{">"}</Nav>
+        <div>
+          <Nav onClick={goPrevMonth}>{"<"}</Nav>
+          <Nav onClick={goNextMonth}>{">"}</Nav>
+        </div>
       </Header>
       <ReactCalendar
         ref={calendarRef}
@@ -74,9 +76,11 @@ const Container = styled.div`
 const Header = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
+  padding-right: 2vw;
+  padding-left: 2vw;
   margin-bottom: 1vw;
   background-color: white;
 `;
@@ -88,7 +92,6 @@ const Title = styled.div`
 `;
 
 const Nav = styled.button`
-  font-size: 1.5rem;
   outline: none;
   border: none;
   background-color: transparent;

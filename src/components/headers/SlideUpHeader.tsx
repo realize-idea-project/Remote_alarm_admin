@@ -47,7 +47,7 @@ export const SlideUpHeader = ({ window }: Props) => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" component="div">
+            <Typography component="div">
               키즈카페 관리자 어플리케이션
             </Typography>
           </Toolbar>
