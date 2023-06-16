@@ -1,41 +1,55 @@
 import _ from "lodash";
 import { getTimeInYYMM } from "./timeUtils";
+import { SelectStatus } from "./types";
 
-class CustomDate extends Date {
-  getDisplayHour() {
-    return getTimeInYYMM(this);
-  }
-}
-
-export class TimeGenerator {
+class TimeGenerator {
   private readonly interval = 30;
 
-  private startTime: CustomDate;
+  private startTime: Date;
 
-  private endTime: CustomDate;
+  private endTime: Date;
 
-  private times: CustomDate[] = [];
+  private times: Date[] = [];
 
   constructor(start: number, end: number) {
-    this.startTime = new CustomDate();
+    this.startTime = new Date();
     this.startTime.setHours(start, 0, 0);
 
-    this.endTime = new CustomDate();
+    this.endTime = new Date();
     this.endTime.setHours(end, 0, 0);
   }
 
-  generate = () => {
+  generate() {
     let currentTime = this.startTime;
 
     while (currentTime <= this.endTime) {
-      this.times.push(_.cloneDeep(currentTime));
+      const currentDate = _.cloneDeep(currentTime);
+      this.times.push(currentDate);
       currentTime.setMinutes(currentTime.getMinutes() + this.interval);
     }
 
     return this;
-  };
+  }
 
-  getList = () => {
+  getList() {
     return this.times;
-  };
+  }
+
+  getTable() {
+    if (_.isEmpty(this.times)) return {};
+
+    const table = this.times.reduce((acc, cur) => {
+      const id = getTimeInYYMM(cur);
+      acc[id] = { id, isSelected: false };
+
+      return acc;
+    }, {} as Record<string, SelectStatus>);
+
+    return table;
+  }
 }
+
+const generator = new TimeGenerator(9, 24).generate();
+
+export const TIME_LIST = generator.getList();
+export const timeTable = generator.getTable();
