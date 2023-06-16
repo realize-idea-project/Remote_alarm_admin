@@ -8,7 +8,7 @@ import Slide from "@mui/material/Slide";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { BasicDrawer } from "../../drawers/BasicDrawer";
+import { BasicDrawer } from "../drawers/BasicDrawer";
 
 interface Props {
   window?: () => Window;

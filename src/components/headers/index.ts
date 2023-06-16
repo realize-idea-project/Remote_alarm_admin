@@ -1,1 +1,1 @@
-export { SlideUpHeader } from "./SlideUpHeader/SlideUpHeader";
+export { SlideUpHeader } from "./SlideUpHeader";
