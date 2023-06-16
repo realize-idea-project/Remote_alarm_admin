@@ -11,8 +11,6 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 
-const drawerWidth = 240;
-
 interface Props {
   isOpen: boolean;
   onClose: () => void;
@@ -22,7 +20,9 @@ export const BasicDrawer: React.FC<Props> = ({ isOpen, onClose }) => {
   return (
     <Box
       component="nav"
-      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      sx={{
+        flexShrink: { sm: 0 },
+      }}
       aria-label="mailbox folders"
     >
       <Drawer open={isOpen} onClose={onClose}>
@@ -32,7 +32,7 @@ export const BasicDrawer: React.FC<Props> = ({ isOpen, onClose }) => {
           <List>
             {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
               <ListItem key={text} disablePadding>
-                <ListItemButton>
+                <ListItemButton sx={{ pr: 5 }}>
                   <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon>
