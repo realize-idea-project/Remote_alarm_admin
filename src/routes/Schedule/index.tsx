@@ -9,11 +9,22 @@ export const Schedule = () => {
       <div>hi</div>
       <div>hi</div>
       <div>hi</div>
+      <div>hi</div>
+      <div>hi</div>
+      <div>hi</div>
+      <div>hi</div>
+      <div>hi</div>
+      <div>hi</div>
+      <div>hi</div>
+      <div>hi</div>
+      <div>hi</div>
+      <div>hi</div>
+      <div>hi</div>
+      <div>hi</div>
     </Container>
   );
 };
 
 const Container = styled.div`
-  background-color: #ddd;
   height: 100vh;
 `;
