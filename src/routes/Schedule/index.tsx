@@ -1,30 +1,40 @@
 import React, { useState } from "react";
+import dayjs, { Dayjs } from "dayjs";
 import { styled } from "styled-components";
 
+import { CustomCalendar } from "./CustomCalendar";
+import { Selectors } from "./Selectors/Selectors";
+import { timeTable } from "./Selectors/timeGenerator";
+import { FloatingIcon } from "./FloatingIcon";
+
 export const Schedule = () => {
-  const [value, onChange] = useState(new Date());
+  const [date, setDate] = useState<Dayjs | null>(dayjs(new Date()));
+  const [selectedTime, setSelectedTime] = useState(timeTable);
+
+  const handleChange = (value: Dayjs | null) => {
+    setDate(value);
+  };
+
+  const handleToggle = (endTime: string) => {
+    const newEntry = {
+      id: selectedTime[endTime].id,
+      isSelected: !selectedTime[endTime].isSelected,
+    };
+
+    setSelectedTime({ ...selectedTime, [endTime]: newEntry });
+  };
 
   return (
     <Container>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
+      <CustomCalendar currentDate={date} onChangeDate={handleChange} />
+      <Selectors selectedTime={selectedTime} onChangeTime={handleToggle} />
+      <FloatingIcon />
     </Container>
   );
 };
 
 const Container = styled.div`
-  height: 100vh;
+  overflow-y: scroll;
+  padding-bottom: 50px;
+  position: relative;
 `;

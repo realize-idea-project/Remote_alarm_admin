@@ -1,13 +1,13 @@
 import React, { FC, PropsWithChildren } from "react";
 import styled from "styled-components";
-import { HideAppBar } from "../headers";
+import { SlideUpHeader } from "../headers";
 // import { BottomNavigation } from "../navigations";
 // import { FilterHeader } from "../headers";
 
 export const MobileLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Container>
-      <HideAppBar />
+      <SlideUpHeader />
       {children}
     </Container>
   );
