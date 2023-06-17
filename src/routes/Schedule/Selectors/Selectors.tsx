@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import { List, ListItem, Typography } from "@mui/material";
 import Switch from "@mui/material/Switch";
 import { RANGE_LIST, timeTable } from "./timeGenerator";
-import { getTimeInYYMM } from "./timeUtils";
+import { getTimeInHHMM } from "./timeUtils";
 
 interface Props {
   selectedTime: typeof timeTable;
@@ -15,8 +15,8 @@ export const Selectors: FC<Props> = ({ selectedTime, onChangeTime }) => {
   return (
     <List>
       {RANGE_LIST.map(([start, end]) => {
-        const startTime = getTimeInYYMM(start);
-        const endTime = getTimeInYYMM(end);
+        const startTime = getTimeInHHMM(start);
+        const endTime = getTimeInHHMM(end);
         return (
           <ListItem key={start.toString()} sx={{ marginLeft: "2vw" }}>
             <RowItem>

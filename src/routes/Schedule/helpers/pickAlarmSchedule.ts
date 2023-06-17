@@ -2,13 +2,17 @@ import _ from "lodash";
 import { timeTable } from "../Selectors/timeGenerator";
 import { SelectStatus } from "../Selectors/types";
 
-export const pickAlarmTime = (table: typeof timeTable) => {
+export const pickAlarmTime = (
+  selectedDate: number,
+  table: typeof timeTable
+) => {
   return _.chain(table)
     .entries()
     .map(filterSelectedTime) // 선택된 구간의 끝나는 시간 추려내기
     .reduce(groupByRange, [[]]) // 연속된 구간끼리 묶기
     .filter((date) => !_.isEmpty(date))
     .map((range) => range[range.length - 1]) // 구간의 마지막 시간만 가져가기
+    .map((t) => makeItLocaleString(selectedDate, t))
     .value();
 };
 
@@ -23,4 +27,15 @@ const groupByRange = (acc: string[][], cur: string) => {
   }
 
   return acc;
+};
+
+const makeItLocaleString = (date: number, time: string) => {
+  const [hour, minute] = time.split(":");
+  const dateObj = new Date();
+  dateObj.setDate(date);
+  dateObj.setHours(Number(hour));
+  dateObj.setMinutes(Number(minute));
+  dateObj.setSeconds(0);
+
+  return dateObj.toString();
 };

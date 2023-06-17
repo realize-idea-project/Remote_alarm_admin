@@ -1,4 +1,4 @@
-export const getTimeInYYMM = (time: Date) => {
+export const getTimeInHHMM = (time: Date) => {
   return time.toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "2-digit",

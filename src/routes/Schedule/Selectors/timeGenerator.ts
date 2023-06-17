@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { getTimeInYYMM } from "./timeUtils";
+import { getTimeInHHMM } from "./timeUtils";
 import { SelectStatus } from "./types";
 
 class TimeGenerator {
@@ -39,7 +39,7 @@ class TimeGenerator {
     if (_.isEmpty(this.times)) return {};
 
     const table = this.times.reduce((acc, cur) => {
-      const id = getTimeInYYMM(cur);
+      const id = getTimeInHHMM(cur);
       acc[id] = { isSelected: false };
 
       return acc;

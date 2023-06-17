@@ -47,8 +47,8 @@ export const Schedule = () => {
   };
 
   const applySchedule = async () => {
-    const schedule = pickAlarmTime(selectedTime);
     const today = date.date();
+    const schedule = pickAlarmTime(today, selectedTime);
     await setData(today, JSON.stringify(schedule));
     alert("알림 수정이 완료되었습니다.");
   };

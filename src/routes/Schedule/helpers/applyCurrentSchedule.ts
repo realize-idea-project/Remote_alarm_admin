@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { timeTable } from "../Selectors/timeGenerator";
+import { getTimeInHHMM } from "../Selectors/timeUtils";
 
 export const applyCurrentSchedule = (
   schedule: string,
@@ -9,7 +10,9 @@ export const applyCurrentSchedule = (
   const newTable = { ...table };
 
   return parsed.reduce((acc, cur) => {
-    acc[cur].isSelected = true;
+    const time = getTimeInHHMM(new Date(cur));
+
+    acc[time].isSelected = true;
     return acc;
   }, newTable);
 };
