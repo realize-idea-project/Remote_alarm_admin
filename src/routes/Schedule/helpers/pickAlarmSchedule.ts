@@ -11,8 +11,7 @@ export const pickAlarmTime = (
     .map(filterSelectedTime) // 선택된 구간의 끝나는 시간 추려내기
     .reduce(groupByRange, [[]]) // 연속된 구간끼리 묶기
     .filter((date) => !_.isEmpty(date))
-    .map((range) => range[range.length - 1]) // 구간의 마지막 시간만 가져가기
-    .map((t) => makeItLocaleString(selectedDate, t))
+    .map((range) => range.map((time) => makeItLocaleString(selectedDate, time)))
     .value();
 };
 

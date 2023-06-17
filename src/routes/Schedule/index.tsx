@@ -24,7 +24,8 @@ export const Schedule = () => {
     const today = date.date();
     getData(today).then((currentSchedule) => {
       if (!_.isNil(currentSchedule)) {
-        const newTable = applyCurrentSchedule(currentSchedule, selectedTime);
+        const iniTable = refreshSchedule(selectedTime);
+        const newTable = applyCurrentSchedule(currentSchedule, iniTable);
         setSelectedTime(newTable);
       } else {
         const newTable = refreshSchedule(selectedTime);
@@ -49,6 +50,7 @@ export const Schedule = () => {
   const applySchedule = async () => {
     const today = date.date();
     const schedule = pickAlarmTime(today, selectedTime);
+
     await setData(today, JSON.stringify(schedule));
     alert("알림 수정이 완료되었습니다.");
   };

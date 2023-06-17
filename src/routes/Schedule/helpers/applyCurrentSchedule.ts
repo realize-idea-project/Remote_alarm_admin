@@ -6,15 +6,18 @@ export const applyCurrentSchedule = (
   schedule: string,
   table: typeof timeTable
 ) => {
-  const parsed: string[] = JSON.parse(schedule);
+  const parsed: string[][] = JSON.parse(schedule);
   const newTable = { ...table };
 
-  return parsed.reduce((acc, cur) => {
-    const time = getTimeInHHMM(new Date(cur));
+  return _.chain(parsed)
+    .flatten()
+    .reduce((acc, cur) => {
+      const time = getTimeInHHMM(new Date(cur));
 
-    acc[time].isSelected = true;
-    return acc;
-  }, newTable);
+      acc[time].isSelected = true;
+      return acc;
+    }, newTable)
+    .value();
 };
 
 export const refreshSchedule = (table: typeof timeTable) => {
