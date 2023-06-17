@@ -1,17 +1,13 @@
 import React, { FC, PropsWithChildren } from "react";
 import styled from "styled-components";
-// import { SideNavigation } from "../navigations";
-// import { FilterHeader } from "../headers";
+import { PermanentDrawer } from "../drawers/PermanentDrawer";
 
 export const TabletLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Container>
-      {children}
-      {/* <SideNavigation />
-      <div>
-        <FilterHeader />
-        {children}
-      </div> */}
+      <PermanentDrawer />
+
+      <Content>{children}</Content>
     </Container>
   );
 };
@@ -19,5 +15,12 @@ export const TabletLayout: FC<PropsWithChildren> = ({ children }) => {
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  position: relative;
+  width: 100%;
+`;
+
+const Content = styled.div`
+  width: 100%;
+  padding-top: 70px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;

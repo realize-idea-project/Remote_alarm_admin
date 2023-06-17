@@ -20,11 +20,11 @@ export const applyCurrentSchedule = (
     .value();
 };
 
-export const refreshSchedule = (table: typeof timeTable) => {
+export const refreshSchedule = (table: typeof timeTable, status = false) => {
   const newTable = { ...table };
   return _.chain(newTable)
     .entries()
-    .map(([key, { isSelected }]) => [key, { isSelected: false }])
+    .map(([key, { isSelected }]) => [key, { isSelected: status }])
     .fromPairs()
     .value();
 };

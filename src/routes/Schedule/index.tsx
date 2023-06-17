@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import _ from "lodash";
 import dayjs, { Dayjs } from "dayjs";
-import { styled } from "styled-components";
+import { useMediaQuery as useMedia } from "react-responsive";
+import { Responsive } from "../../constants";
 import { RootLayout } from "../../components/layouts";
 import { useRealTimeDB } from "../../firebase/useRealTimeDB";
 
@@ -19,6 +20,8 @@ export const Schedule = () => {
   const { setData, getData } = useRealTimeDB();
   const [date, setDate] = useState<Dayjs>(dayjs(new Date()));
   const [selectedTime, setSelectedTime] = useState(timeTable);
+
+  const isTablet = useMedia({ query: `(min-width : ${Responsive.tablet})` });
 
   useEffect(() => {
     const today = date.date();
@@ -47,6 +50,11 @@ export const Schedule = () => {
     setSelectedTime({ ...selectedTime, [endTime]: newEntry });
   };
 
+  const toggleAll = () => {
+    const iniTable = refreshSchedule(selectedTime, true);
+    setSelectedTime(iniTable);
+  };
+
   const applySchedule = async () => {
     const today = date.date();
     const schedule = pickAlarmTime(today, selectedTime);
@@ -57,17 +65,21 @@ export const Schedule = () => {
 
   return (
     <RootLayout>
-      <Container>
-        <CustomCalendar currentDate={date} onChangeDate={handleChange} />
-        <Selectors selectedTime={selectedTime} onChangeTime={handleToggle} />
-        <FloatingIcon onClick={applySchedule} />
-      </Container>
+      <CustomCalendar
+        currentDate={date}
+        onChangeDate={handleChange}
+        open={isTablet}
+      />
+      <Selectors
+        selectedTime={selectedTime}
+        onChangeTime={handleToggle}
+        horizontal={isTablet}
+      />
+      <FloatingIcon
+        onClick={applySchedule}
+        type={isTablet ? "text" : "icon"}
+        onClickAll={toggleAll}
+      />
     </RootLayout>
   );
 };
-
-const Container = styled.div`
-  overflow-y: scroll;
-  padding-bottom: 50px;
-  position: relative;
-`;

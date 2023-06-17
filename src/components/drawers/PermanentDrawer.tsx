@@ -11,18 +11,23 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { Typography } from "@mui/material";
 
-interface Props {
-  isOpen: boolean;
-  onClose: () => void;
-}
+interface Props {}
 
-export const BasicDrawer: React.FC<Props> = ({ isOpen, onClose }) => {
+export const PermanentDrawer: React.FC<Props> = () => {
   const [currentTab, setCurrentTab] = useState("알림 설정");
 
   return (
     <Box component="nav">
-      <Drawer open={isOpen} onClose={onClose}>
-        <Box sx={{ minWidth: 200, maxWidth: 300, width: "50vw" }}>
+      <Drawer
+        variant="permanent"
+        sx={{
+          ".css-12i7wg6-MuiPaper-root-MuiDrawer-paper": {
+            position: "relative",
+            height: "100vh",
+          },
+        }}
+      >
+        <Box sx={{ minWidth: 200, maxWidth: 280, width: "30vw" }}>
           <Toolbar />
           <Divider />
 

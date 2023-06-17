@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import _ from "lodash";
 
@@ -19,20 +19,26 @@ import "dayjs/locale/ko";
 interface Props {
   currentDate: Dayjs | null;
   onChangeDate: (date: Dayjs | null) => void;
+  open?: boolean;
 }
 
-export const CustomCalendar: FC<Props> = ({ currentDate, onChangeDate }) => {
+export const CustomCalendar: FC<Props> = ({
+  currentDate,
+  onChangeDate,
+  open,
+}) => {
   if (_.isNil(currentDate)) return null;
+  console.log("open", open);
   return (
-    <div
-      style={{ display: "flex", justifyContent: "center", paddingBottom: 10 }}
-    >
-      <Accordion sx={{ width: "90vw" }}>
+    <div>
+      <Accordion sx={{ marginTop: 1 }} expanded={open || undefined}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={!open ? <ExpandMoreIcon /> : null}
           aria-controls="panel1a-content"
           id="panel1a-header"
           sx={{
+            borderBottom: open ? "1px solid lightgray" : "none",
+            cursor: open ? "none" : "pointer",
             "&.Mui-expanded": {
               minHeight: 0,
             },
@@ -46,9 +52,10 @@ export const CustomCalendar: FC<Props> = ({ currentDate, onChangeDate }) => {
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
+              fontSize: "1rem",
             }}
           >
-            <EventNoteIcon sx={{ fontSize: "1rem" }} />
+            <EventNoteIcon />
             <div style={{ width: 5 }} />
             <Typography>{`${
               (currentDate.month() ?? 0) + 1
@@ -67,12 +74,24 @@ export const CustomCalendar: FC<Props> = ({ currentDate, onChangeDate }) => {
             <DateCalendar
               sx={{
                 width: "90vw",
+                maxWidth: 700,
+                paddingTop: "10px",
                 paddingBottom: "12px",
                 paddingX: 1,
-                ".css-sm5cyk-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)":
+                "@media (min-width: 768px)": {
+                  width: "60vw",
+                  maxWidth: 1000,
+                },
+                border: "none",
+                ".css-167fx6q-MuiButtonBase-root-MuiPickersDay-root.Mui-selected":
+                  {
+                    // borderRadius: "100px",
+                  },
+                ".css-1kpro0o-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)":
                   {
                     border: "none",
                   },
+
                 ".css-1cafy48-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition":
                   {
                     minHeight: 220,
@@ -87,10 +106,6 @@ export const CustomCalendar: FC<Props> = ({ currentDate, onChangeDate }) => {
                   width: "15vw",
                   maxHeight: "50px",
                 },
-                // ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
-                //   width: "15vw",
-                //   maxHeight: "50px",
-                // },
               }}
               value={currentDate}
               onChange={onChangeDate}
