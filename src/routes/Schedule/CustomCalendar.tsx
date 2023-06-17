@@ -85,9 +85,7 @@ export const CustomCalendar: FC<Props> = ({
                 border: "none",
                 ".css-167fx6q-MuiButtonBase-root-MuiPickersDay-root.Mui-selected":
                   {
-                    borderRadius: "100px",
-
-                    // backgroundColor: "red",
+                    // borderRadius: "100px",
                   },
                 ".css-1kpro0o-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)":
                   {

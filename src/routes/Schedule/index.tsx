@@ -50,6 +50,11 @@ export const Schedule = () => {
     setSelectedTime({ ...selectedTime, [endTime]: newEntry });
   };
 
+  const toggleAll = () => {
+    const iniTable = refreshSchedule(selectedTime, true);
+    setSelectedTime(iniTable);
+  };
+
   const applySchedule = async () => {
     const today = date.date();
     const schedule = pickAlarmTime(today, selectedTime);
@@ -70,7 +75,11 @@ export const Schedule = () => {
         onChangeTime={handleToggle}
         horizontal={isTablet}
       />
-      <FloatingIcon onClick={applySchedule} type={isTablet ? "text" : "icon"} />
+      <FloatingIcon
+        onClick={applySchedule}
+        type={isTablet ? "text" : "icon"}
+        onClickAll={toggleAll}
+      />
     </RootLayout>
   );
 };
