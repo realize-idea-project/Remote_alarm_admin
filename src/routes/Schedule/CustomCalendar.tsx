@@ -1,5 +1,6 @@
-import React from "react";
+import { FC, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
+import _ from "lodash";
 
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -15,13 +16,13 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 
 import "dayjs/locale/ko";
 
-export const CustomCalendar = () => {
-  const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date()));
+interface Props {
+  currentDate: Dayjs | null;
+  onChangeDate: (date: Dayjs | null) => void;
+}
 
-  const handleChange = (value: dayjs.Dayjs | null) => {
-    setValue(value);
-  };
-
+export const CustomCalendar: FC<Props> = ({ currentDate, onChangeDate }) => {
+  if (_.isNil(currentDate)) return null;
   return (
     <div
       style={{ display: "flex", justifyContent: "center", paddingBottom: 10 }}
@@ -50,8 +51,8 @@ export const CustomCalendar = () => {
             <EventNoteIcon sx={{ fontSize: "1rem" }} />
             <div style={{ width: 5 }} />
             <Typography>{`${
-              (value?.month() ?? 0) + 1
-            }월 ${value?.date()}일`}</Typography>
+              (currentDate.month() ?? 0) + 1
+            }월 ${currentDate.date()}일`}</Typography>
           </div>
         </AccordionSummary>
         <AccordionDetails
@@ -91,15 +92,15 @@ export const CustomCalendar = () => {
                 //   maxHeight: "50px",
                 // },
               }}
-              value={value}
-              onChange={handleChange}
+              value={currentDate}
+              onChange={onChangeDate}
               views={["day"]}
               fixedWeekNumber={5}
               showDaysOutsideCurrentMonth
               slots={{ day: Day }}
               slotProps={{
                 day: {
-                  selectedDay: value,
+                  selectedDay: currentDate,
                 } as any,
               }}
             />
