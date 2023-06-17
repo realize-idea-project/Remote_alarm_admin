@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import _ from "lodash";
 import dayjs, { Dayjs } from "dayjs";
+import { useMediaQuery as useMedia } from "react-responsive";
+import { Responsive } from "../../constants";
 import { RootLayout } from "../../components/layouts";
 import { useRealTimeDB } from "../../firebase/useRealTimeDB";
 
@@ -18,6 +20,8 @@ export const Schedule = () => {
   const { setData, getData } = useRealTimeDB();
   const [date, setDate] = useState<Dayjs>(dayjs(new Date()));
   const [selectedTime, setSelectedTime] = useState(timeTable);
+
+  const isTablet = useMedia({ query: `(min-width : ${Responsive.tablet})` });
 
   useEffect(() => {
     const today = date.date();
@@ -58,7 +62,10 @@ export const Schedule = () => {
     <RootLayout>
       <CustomCalendar currentDate={date} onChangeDate={handleChange} />
       <Selectors selectedTime={selectedTime} onChangeTime={handleToggle} />
-      <FloatingIcon onClick={applySchedule} />
+      <FloatingIcon
+        onClick={applySchedule}
+        size={isTablet ? "large" : "small"}
+      />
     </RootLayout>
   );
 };
