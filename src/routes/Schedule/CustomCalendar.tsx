@@ -1,8 +1,8 @@
 import React from "react";
 import dayjs, { Dayjs } from "dayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers";
+
+import { PickersDay, PickersDayProps } from "@mui/x-date-pickers/PickersDay";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 
-import { Day } from "./Day";
 import "dayjs/locale/ko";
 
 export const CustomCalendar = () => {
@@ -21,7 +20,9 @@ export const CustomCalendar = () => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div
+      style={{ display: "flex", justifyContent: "center", paddingBottom: 10 }}
+    >
       <Accordion sx={{ width: "90vw" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -55,53 +56,70 @@ export const CustomCalendar = () => {
             padding: 0,
           }}
         >
-          <LocalizationProvider
-            dateAdapter={AdapterDayjs}
-            adapterLocale={dayjs.locale("ko")}
-          >
-            <DateCalendar
-              sx={{
-                width: "90vw",
-                paddingBottom: "12px",
-                paddingX: 1,
-                ".css-sm5cyk-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)":
-                  {
-                    border: "none",
-                  },
-                ".css-1cafy48-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition":
-                  {
-                    minHeight: 220,
-                  },
-                ".css-2jurxj-MuiDayCalendar-slideTransition": {
-                  minHeight: 210,
+          <DateCalendar
+            sx={{
+              width: "90vw",
+              paddingBottom: "12px",
+              paddingX: 1,
+              ".css-sm5cyk-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)":
+                {
+                  border: "none",
                 },
-                ".css-nk89i7-MuiPickersCalendarHeader-root": {
-                  marginTop: "8px",
+              ".css-1cafy48-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition":
+                {
+                  minHeight: 220,
                 },
-                ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
-                  width: "15vw",
-                  maxHeight: "50px",
-                },
-                // ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
-                //   width: "15vw",
-                //   maxHeight: "50px",
-                // },
-              }}
-              value={value}
-              onChange={handleChange}
-              views={["day"]}
-              fixedWeekNumber={5}
-              showDaysOutsideCurrentMonth
-              slots={{ day: Day }}
-              slotProps={{
-                day: {
-                  selectedDay: value,
-                } as any,
-              }}
-            />
-          </LocalizationProvider>
+              ".css-2jurxj-MuiDayCalendar-slideTransition": {
+                minHeight: 210,
+              },
+              ".css-nk89i7-MuiPickersCalendarHeader-root": {
+                marginTop: "8px",
+              },
+              ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
+                width: "15vw",
+                maxHeight: "50px",
+              },
+              // ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
+              //   width: "15vw",
+              //   maxHeight: "50px",
+              // },
+            }}
+            value={value}
+            onChange={handleChange}
+            views={["day"]}
+            fixedWeekNumber={5}
+            showDaysOutsideCurrentMonth
+            slots={{ day: Day }}
+            slotProps={{
+              day: {
+                selectedDay: value,
+              } as any,
+            }}
+          />
         </AccordionDetails>
       </Accordion>
     </div>
+  );
+};
+
+const Day = (
+  props: PickersDayProps<Dayjs> & { selectedDay?: Dayjs | null }
+) => {
+  const { day, selectedDay, ...other } = props;
+
+  const getColor = (day: dayjs.Dayjs) => {
+    if (day.day() === 6) return "blue";
+  };
+
+  return (
+    <PickersDay
+      day={day}
+      sx={{
+        color: getColor(day),
+        width: "15vw",
+        maxHeight: "50px",
+      }}
+      {...other}
+    />
   );
 };
