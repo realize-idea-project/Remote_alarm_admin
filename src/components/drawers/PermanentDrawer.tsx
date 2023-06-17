@@ -18,7 +18,15 @@ export const PermanentDrawer: React.FC<Props> = () => {
 
   return (
     <Box component="nav">
-      <Drawer variant="permanent">
+      <Drawer
+        variant="permanent"
+        sx={{
+          ".css-12i7wg6-MuiPaper-root-MuiDrawer-paper": {
+            position: "relative",
+            height: "100vh",
+          },
+        }}
+      >
         <Box sx={{ minWidth: 200, maxWidth: 280, width: "30vw" }}>
           <Toolbar />
           <Divider />
