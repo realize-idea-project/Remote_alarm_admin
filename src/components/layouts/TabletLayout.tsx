@@ -15,10 +15,12 @@ export const TabletLayout: FC<PropsWithChildren> = ({ children }) => {
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  position: relative;
+  width: 100%;
+
+  background-color: aqua;
 `;
 
 const Content = styled.div`
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  background-color: tomato;
 `;
