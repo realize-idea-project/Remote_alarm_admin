@@ -13,7 +13,7 @@ export const MobileLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Container>
       <SlideUpHeader onClickIcon={handleDrawerToggle} />
-      {children}
+      <Content>{children}</Content>
       <BasicDrawer isOpen={mobileOpen} onClose={handleDrawerToggle} />
     </Container>
   );
@@ -25,4 +25,14 @@ const Container = styled.div`
   position: relative;
   background-color: ${({ theme }) => theme.colors.white};
   font-size: 1rem;
+`;
+
+const Content = styled.div`
+  overflow-y: scroll;
+  padding-bottom: 50px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
