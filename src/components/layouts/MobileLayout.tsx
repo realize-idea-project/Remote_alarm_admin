@@ -28,7 +28,6 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  overflow-y: scroll;
   padding-bottom: 50px;
   position: relative;
   display: flex;
