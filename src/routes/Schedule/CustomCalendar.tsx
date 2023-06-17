@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import _ from "lodash";
 
@@ -24,15 +24,8 @@ interface Props {
 export const CustomCalendar: FC<Props> = ({ currentDate, onChangeDate }) => {
   if (_.isNil(currentDate)) return null;
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        paddingBottom: 10,
-        marginTop: 10,
-      }}
-    >
-      <Accordion sx={{ width: "90vw" }}>
+    <div>
+      <Accordion sx={{ marginTop: 1 }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -72,8 +65,14 @@ export const CustomCalendar: FC<Props> = ({ currentDate, onChangeDate }) => {
             <DateCalendar
               sx={{
                 width: "90vw",
+                maxWidth: 700,
+
                 paddingBottom: "12px",
                 paddingX: 1,
+                "@media (min-width: 768px)": {
+                  width: "60vw",
+                  maxWidth: 1000,
+                },
                 ".css-sm5cyk-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)":
                   {
                     border: "none",
@@ -92,10 +91,6 @@ export const CustomCalendar: FC<Props> = ({ currentDate, onChangeDate }) => {
                   width: "15vw",
                   maxHeight: "50px",
                 },
-                // ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
-                //   width: "15vw",
-                //   maxHeight: "50px",
-                // },
               }}
               value={currentDate}
               onChange={onChangeDate}
