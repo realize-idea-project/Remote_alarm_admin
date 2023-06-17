@@ -8,8 +8,6 @@ export const Day = (
 
   const getColor = (day: dayjs.Dayjs) => {
     if (day.day() === 6) return "blue";
-    // else if (day.day() === 0) return "#c63939";
-    // return "black";
   };
 
   return (
@@ -17,6 +15,8 @@ export const Day = (
       day={day}
       sx={{
         color: getColor(day),
+        width: "15vw",
+        maxHeight: "50px",
       }}
       {...other}
     />
