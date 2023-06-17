@@ -1,8 +1,7 @@
 import { FC } from "react";
 import _ from "lodash";
 import { styled } from "styled-components";
-import { List, ListItem } from "@mui/material";
-import Switch from "@mui/material/Switch";
+
 import { RANGE_LIST, timeTable } from "./timeGenerator";
 import { getTimeInHHMM } from "./timeUtils";
 

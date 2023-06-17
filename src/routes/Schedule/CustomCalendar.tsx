@@ -28,14 +28,17 @@ export const CustomCalendar: FC<Props> = ({
   open,
 }) => {
   if (_.isNil(currentDate)) return null;
+  console.log("open", open);
   return (
     <div>
-      <Accordion sx={{ marginTop: 1 }} expanded={open}>
+      <Accordion sx={{ marginTop: 1 }} expanded={open || undefined}>
         <AccordionSummary
           expandIcon={!open ? <ExpandMoreIcon /> : null}
           aria-controls="panel1a-content"
           id="panel1a-header"
           sx={{
+            borderBottom: open ? "1px solid lightgray" : "none",
+            cursor: open ? "none" : "pointer",
             "&.Mui-expanded": {
               minHeight: 0,
             },
@@ -72,7 +75,7 @@ export const CustomCalendar: FC<Props> = ({
               sx={{
                 width: "90vw",
                 maxWidth: 700,
-
+                paddingTop: "10px",
                 paddingBottom: "12px",
                 paddingX: 1,
                 "@media (min-width: 768px)": {
