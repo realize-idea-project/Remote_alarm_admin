@@ -32,7 +32,7 @@ export const CustomCalendar: FC<Props> = ({
     <div>
       <Accordion sx={{ marginTop: 1 }} expanded={open}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={!open ? <ExpandMoreIcon /> : null}
           aria-controls="panel1a-content"
           id="panel1a-header"
           sx={{
@@ -49,9 +49,10 @@ export const CustomCalendar: FC<Props> = ({
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
+              fontSize: "1rem",
             }}
           >
-            <EventNoteIcon sx={{ fontSize: "1rem" }} />
+            <EventNoteIcon />
             <div style={{ width: 5 }} />
             <Typography>{`${
               (currentDate.month() ?? 0) + 1
