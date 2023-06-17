@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import _ from "lodash";
 import dayjs, { Dayjs } from "dayjs";
 import { styled } from "styled-components";
+import { RootLayout } from "../../components/layouts";
 import { useRealTimeDB } from "../../firebase/useRealTimeDB";
 
 import { CustomCalendar } from "./CustomCalendar";
@@ -53,11 +54,13 @@ export const Schedule = () => {
   };
 
   return (
-    <Container>
-      <CustomCalendar currentDate={date} onChangeDate={handleChange} />
-      <Selectors selectedTime={selectedTime} onChangeTime={handleToggle} />
-      <FloatingIcon onClick={applySchedule} />
-    </Container>
+    <RootLayout>
+      <Container>
+        <CustomCalendar currentDate={date} onChangeDate={handleChange} />
+        <Selectors selectedTime={selectedTime} onChangeTime={handleToggle} />
+        <FloatingIcon onClick={applySchedule} />
+      </Container>
+    </RootLayout>
   );
 };
 
