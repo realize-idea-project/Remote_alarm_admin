@@ -16,11 +16,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-
-  background-color: aqua;
 `;
 
 const Content = styled.div`
   width: 100%;
-  background-color: tomato;
+  padding-top: 70px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
