@@ -19,13 +19,18 @@ import "dayjs/locale/ko";
 interface Props {
   currentDate: Dayjs | null;
   onChangeDate: (date: Dayjs | null) => void;
+  open?: boolean;
 }
 
-export const CustomCalendar: FC<Props> = ({ currentDate, onChangeDate }) => {
+export const CustomCalendar: FC<Props> = ({
+  currentDate,
+  onChangeDate,
+  open,
+}) => {
   if (_.isNil(currentDate)) return null;
   return (
     <div>
-      <Accordion sx={{ marginTop: 1 }}>
+      <Accordion sx={{ marginTop: 1 }} expanded={open}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

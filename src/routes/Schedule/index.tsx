@@ -60,7 +60,11 @@ export const Schedule = () => {
 
   return (
     <RootLayout>
-      <CustomCalendar currentDate={date} onChangeDate={handleChange} />
+      <CustomCalendar
+        currentDate={date}
+        onChangeDate={handleChange}
+        open={isTablet}
+      />
       <Selectors selectedTime={selectedTime} onChangeTime={handleToggle} />
       <FloatingIcon
         onClick={applySchedule}
