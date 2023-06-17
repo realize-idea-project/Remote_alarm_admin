@@ -25,7 +25,12 @@ export const CustomCalendar: FC<Props> = ({ currentDate, onChangeDate }) => {
   if (_.isNil(currentDate)) return null;
   return (
     <div
-      style={{ display: "flex", justifyContent: "center", paddingBottom: 10 }}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        paddingBottom: 10,
+        marginTop: 10,
+      }}
     >
       <Accordion sx={{ width: "90vw" }}>
         <AccordionSummary
