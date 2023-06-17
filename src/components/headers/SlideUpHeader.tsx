@@ -8,19 +8,12 @@ import Slide from "@mui/material/Slide";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { BasicDrawer } from "../drawers/BasicDrawer";
-
 interface Props {
   window?: () => Window;
+  onClickIcon?: () => void;
 }
 
-export const SlideUpHeader = ({ window }: Props) => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
+export const SlideUpHeader = ({ window, onClickIcon }: Props) => {
   const trigger = useScrollTrigger({
     target: window ? window() : undefined,
     threshold: 20,
@@ -43,7 +36,7 @@ export const SlideUpHeader = ({ window }: Props) => {
               edge="start"
               color="inherit"
               aria-label="menu"
-              onClick={handleDrawerToggle}
+              onClick={() => onClickIcon?.()}
             >
               <MenuIcon />
             </IconButton>
@@ -52,8 +45,6 @@ export const SlideUpHeader = ({ window }: Props) => {
         </AppBar>
       </Slide>
       <Toolbar />
-
-      <BasicDrawer isOpen={mobileOpen} onClose={handleDrawerToggle} />
     </React.Fragment>
   );
 };

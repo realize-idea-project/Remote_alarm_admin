@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,45 +7,53 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { Typography } from "@mui/material";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
 
-type TabType = "알림 설정";
-
 export const BasicDrawer: React.FC<Props> = ({ isOpen, onClose }) => {
+  const [currentTab, setCurrentTab] = useState("알림 설정");
+
   return (
-    <Box
-      component="nav"
-      sx={{
-        flexShrink: { sm: 0 },
-      }}
-      aria-label="mailbox folders"
-    >
+    <Box component="nav">
       <Drawer open={isOpen} onClose={onClose}>
-        <div>
+        <Box sx={{ minWidth: 200, maxWidth: 300, width: "50vw" }}>
           <Toolbar />
           <Divider />
 
           <List sx={{ py: 0 }}>
-            {["알림 설정"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton sx={{ pr: 5 }}>
-                  <ListItemIcon sx={{ minWidth: 30 }}>
-                    <AccessTimeIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
+            {["알림 설정"].map((text) => {
+              const isSelected = text === currentTab;
+
+              return (
+                <ListItem key={text} disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon sx={{ minWidth: 40 }}>
+                      <AccessTimeIcon
+                        sx={{
+                          color: isSelected ? "#1976d2" : "rgba(0, 0, 0, 0.87)",
+                        }}
+                      />
+                    </ListItemIcon>
+                    <Typography
+                      sx={{
+                        fontSize: "0.9rem",
+                        color: isSelected ? "#1976d2" : "rgba(0, 0, 0, 0.87)",
+                      }}
+                    >
+                      {text}
+                    </Typography>
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
           </List>
-        </div>
+        </Box>
       </Drawer>
     </Box>
   );
