@@ -65,11 +65,12 @@ export const Schedule = () => {
         onChangeDate={handleChange}
         open={isTablet}
       />
-      <Selectors selectedTime={selectedTime} onChangeTime={handleToggle} />
-      <FloatingIcon
-        onClick={applySchedule}
-        size={isTablet ? "large" : "small"}
+      <Selectors
+        selectedTime={selectedTime}
+        onChangeTime={handleToggle}
+        horizontal={isTablet}
       />
+      <FloatingIcon onClick={applySchedule} type={isTablet ? "text" : "icon"} />
     </RootLayout>
   );
 };
