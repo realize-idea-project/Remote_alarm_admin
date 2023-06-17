@@ -1,27 +1,42 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import _ from "lodash";
 import { styled } from "styled-components";
 import { List, ListItem, Typography } from "@mui/material";
 import Switch from "@mui/material/Switch";
-import { RANGE_LIST } from "./timeGenerator";
+import { RANGE_LIST, timeTable } from "./timeGenerator";
 import { getTimeInYYMM } from "./timeUtils";
 
 export const Selectors = () => {
-  console.log("LIST", RANGE_LIST);
+  const [selectedTime, setSelectedTime] = useState(timeTable);
+
+  const handleToggle = (endTime: string) => {
+    const newEntry = {
+      id: selectedTime[endTime].id,
+      isSelected: !selectedTime[endTime].isSelected,
+    };
+
+    setSelectedTime({ ...selectedTime, [endTime]: newEntry });
+  };
+
   return (
     <List>
       {RANGE_LIST.map(([start, end]) => {
+        const startTime = getTimeInYYMM(start);
+        const endTime = getTimeInYYMM(end);
         return (
           <ListItem key={start.toString()} sx={{ marginLeft: "2vw" }}>
             <RowItem>
               <RowItem>
-                <Switch size="small" />
+                <Switch
+                  size="small"
+                  checked={selectedTime[endTime].isSelected}
+                  onChange={() => {
+                    handleToggle(endTime);
+                  }}
+                />
                 <Typography>on</Typography>
               </RowItem>
-              <TimeRange
-                start={getTimeInYYMM(start)}
-                end={getTimeInYYMM(end)}
-              />
+              <TimeRange start={startTime} end={endTime} />
             </RowItem>
           </ListItem>
         );

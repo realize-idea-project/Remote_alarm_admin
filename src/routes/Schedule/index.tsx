@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 
 import { CustomCalendar } from "./CustomCalendar";
-import { Selectors } from "./Selectors";
+import { Selectors } from "./Selectors/Selectors";
 
 export const Schedule = () => {
   return (
