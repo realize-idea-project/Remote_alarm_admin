@@ -82,10 +82,18 @@ export const CustomCalendar: FC<Props> = ({
                   width: "60vw",
                   maxWidth: 1000,
                 },
-                ".css-sm5cyk-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)":
+                border: "none",
+                ".css-167fx6q-MuiButtonBase-root-MuiPickersDay-root.Mui-selected":
+                  {
+                    borderRadius: "100px",
+
+                    // backgroundColor: "red",
+                  },
+                ".css-1kpro0o-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)":
                   {
                     border: "none",
                   },
+
                 ".css-1cafy48-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition":
                   {
                     minHeight: 220,
