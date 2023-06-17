@@ -15,4 +15,5 @@ export const Schedule = () => {
 
 const Container = styled.div`
   overflow-y: scroll;
+  padding-bottom: 70vw;
 `;
