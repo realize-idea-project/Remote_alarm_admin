@@ -70,4 +70,8 @@ const Container = styled.div`
   overflow-y: scroll;
   padding-bottom: 50px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;

@@ -32,7 +32,7 @@ export const SlideUpHeader = ({ window }: Props) => {
       <Slide appear={false} direction="down" in={!trigger}>
         <AppBar
           sx={{
-            height: 40,
+            height: 50,
             display: "flex",
             justifyContent: "center",
           }}
@@ -47,9 +47,7 @@ export const SlideUpHeader = ({ window }: Props) => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography component="div">
-              키즈카페 관리자 어플리케이션
-            </Typography>
+            <Typography component="div">관리자 어플리케이션</Typography>
           </Toolbar>
         </AppBar>
       </Slide>

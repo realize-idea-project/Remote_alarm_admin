@@ -17,20 +17,23 @@ export const Selectors: FC<Props> = ({ selectedTime, onChangeTime }) => {
       {RANGE_LIST.map(([start, end]) => {
         const startTime = getTimeInHHMM(start);
         const endTime = getTimeInHHMM(end);
+        const checked = selectedTime[endTime].isSelected;
         return (
-          <ListItem key={start.toString()} sx={{ marginLeft: "2vw" }}>
+          <ListItem key={start.toString()}>
             <RowItem>
               <RowItem>
                 <Switch
                   size="small"
-                  checked={selectedTime[endTime].isSelected}
+                  checked={checked}
                   onChange={() => {
                     onChangeTime(endTime);
                   }}
                 />
-                <Typography>on</Typography>
+                {/* <Typography sx={{ minWidth: 22, ml: 2, fontSize: "0.8rem" }}>
+                  {checked ? "설정" : ""}
+                </Typography> */}
               </RowItem>
-              <TimeRange start={startTime} end={endTime} />
+              <TimeRange start={startTime} end={endTime} checked={checked} />
             </RowItem>
           </ListItem>
         );
@@ -48,11 +51,12 @@ const RowItem = styled.div`
 interface RangeProps {
   start: string;
   end: string;
+  checked: boolean;
 }
 
-const TimeRange: FC<RangeProps> = ({ start, end }) => {
+const TimeRange: FC<RangeProps> = ({ start, end, checked }) => {
   return (
-    <RangeContainer>
+    <RangeContainer $checked={checked}>
       <div>{start}</div>
       <Dash>-</Dash>
       <div>{end}</div>
@@ -60,12 +64,12 @@ const TimeRange: FC<RangeProps> = ({ start, end }) => {
   );
 };
 
-const RangeContainer = styled.div`
+const RangeContainer = styled.div<{ $checked: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding: 8px 20px;
-  border: 0.8px solid lightgray;
+  border: 0.8px solid ${({ $checked }) => ($checked ? "#1976d2" : "lightgray")};
   border-radius: 5px;
   /* width: 200px; */
 
