@@ -1,6 +1,9 @@
 import React from "react";
 import dayjs, { Dayjs } from "dayjs";
 
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 import { PickersDay, PickersDayProps } from "@mui/x-date-pickers/PickersDay";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import Accordion from "@mui/material/Accordion";
@@ -56,46 +59,51 @@ export const CustomCalendar = () => {
             padding: 0,
           }}
         >
-          <DateCalendar
-            sx={{
-              width: "90vw",
-              paddingBottom: "12px",
-              paddingX: 1,
-              ".css-sm5cyk-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)":
-                {
-                  border: "none",
+          <LocalizationProvider
+            dateAdapter={AdapterDayjs}
+            adapterLocale={dayjs.locale("ko")}
+          >
+            <DateCalendar
+              sx={{
+                width: "90vw",
+                paddingBottom: "12px",
+                paddingX: 1,
+                ".css-sm5cyk-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)":
+                  {
+                    border: "none",
+                  },
+                ".css-1cafy48-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition":
+                  {
+                    minHeight: 220,
+                  },
+                ".css-2jurxj-MuiDayCalendar-slideTransition": {
+                  minHeight: 210,
                 },
-              ".css-1cafy48-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition":
-                {
-                  minHeight: 220,
+                ".css-nk89i7-MuiPickersCalendarHeader-root": {
+                  marginTop: "8px",
                 },
-              ".css-2jurxj-MuiDayCalendar-slideTransition": {
-                minHeight: 210,
-              },
-              ".css-nk89i7-MuiPickersCalendarHeader-root": {
-                marginTop: "8px",
-              },
-              ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
-                width: "15vw",
-                maxHeight: "50px",
-              },
-              // ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
-              //   width: "15vw",
-              //   maxHeight: "50px",
-              // },
-            }}
-            value={value}
-            onChange={handleChange}
-            views={["day"]}
-            fixedWeekNumber={5}
-            showDaysOutsideCurrentMonth
-            slots={{ day: Day }}
-            slotProps={{
-              day: {
-                selectedDay: value,
-              } as any,
-            }}
-          />
+                ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
+                  width: "15vw",
+                  maxHeight: "50px",
+                },
+                // ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
+                //   width: "15vw",
+                //   maxHeight: "50px",
+                // },
+              }}
+              value={value}
+              onChange={handleChange}
+              views={["day"]}
+              fixedWeekNumber={5}
+              showDaysOutsideCurrentMonth
+              slots={{ day: Day }}
+              slotProps={{
+                day: {
+                  selectedDay: value,
+                } as any,
+              }}
+            />
+          </LocalizationProvider>
         </AccordionDetails>
       </Accordion>
     </div>

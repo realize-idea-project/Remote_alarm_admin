@@ -1,17 +1,18 @@
 import React from "react";
-
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { styled } from "styled-components";
 
 import { CustomCalendar } from "./CustomCalendar";
+import { Selectors } from "./Selectors";
 
 export const Schedule = () => {
   return (
-    <div>
+    <Container>
       <CustomCalendar />
-    </div>
+      <Selectors />
+    </Container>
   );
 };
+
+const Container = styled.div`
+  overflow-y: scroll;
+`;
