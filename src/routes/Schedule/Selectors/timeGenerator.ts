@@ -40,7 +40,7 @@ class TimeGenerator {
 
     const table = this.times.reduce((acc, cur) => {
       const id = getTimeInYYMM(cur);
-      acc[id] = { id, isSelected: false };
+      acc[id] = { isSelected: false };
 
       return acc;
     }, {} as Record<string, SelectStatus>);

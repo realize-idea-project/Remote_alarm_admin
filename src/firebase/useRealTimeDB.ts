@@ -4,8 +4,8 @@ export const useRealTimeDB = () => {
   const id = 1;
   const realTime = db.ref(`company/company_${id}`);
 
-  const getData = async () => {
-    const snapshot = await realTime.get();
+  const getData = async (date: number) => {
+    const snapshot = await realTime.child(`${date}`).get();
 
     if (snapshot.exists()) {
       return snapshot.val();
@@ -13,7 +13,7 @@ export const useRealTimeDB = () => {
   };
 
   const setData = async (date: number, time: string) => {
-    await realTime.set({ [date]: time });
+    await realTime.child(`${date}`).set(time);
   };
 
   return {

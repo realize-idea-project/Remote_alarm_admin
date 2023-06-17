@@ -13,16 +13,16 @@ export const Schedule = () => {
   const [selectedSchedule, setSelectedSchedule] = useState<ISchedule>();
   const [hasChanged, setHasChanged] = useState(false);
 
-  useEffect(() => {
-    getData().then((res) => {
-      const date = new Date().getDate();
-      const currentSchedule = res[date];
-      if (!_.isNil(currentSchedule)) {
-        const parsed = JSON.parse(currentSchedule);
-        setScheduleList(parsed);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   getData().then((res) => {
+  //     const date = new Date().getDate();
+  //     const currentSchedule = res[date];
+  //     if (!_.isNil(currentSchedule)) {
+  //       const parsed = JSON.parse(currentSchedule);
+  //       setScheduleList(parsed);
+  //     }
+  //   });
+  // }, []);
 
   const addSchedule = (schedule: ISchedule) => {
     const newSchedule = [...scheduleList, schedule];
