@@ -4,21 +4,30 @@ import { styled } from "styled-components";
 
 import { CustomCalendar } from "./CustomCalendar";
 import { Selectors } from "./Selectors/Selectors";
+import { timeTable } from "./Selectors/timeGenerator";
 import { FloatingIcon } from "./FloatingIcon";
 
 export const Schedule = () => {
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(
-    dayjs(new Date())
-  );
+  const [date, setDate] = useState<Dayjs | null>(dayjs(new Date()));
+  const [selectedTime, setSelectedTime] = useState(timeTable);
 
   const handleChange = (value: Dayjs | null) => {
-    setSelectedDate(value);
+    setDate(value);
+  };
+
+  const handleToggle = (endTime: string) => {
+    const newEntry = {
+      id: selectedTime[endTime].id,
+      isSelected: !selectedTime[endTime].isSelected,
+    };
+
+    setSelectedTime({ ...selectedTime, [endTime]: newEntry });
   };
 
   return (
     <Container>
-      <CustomCalendar currentDate={selectedDate} onChangeDate={handleChange} />
-      <Selectors />
+      <CustomCalendar currentDate={date} onChangeDate={handleChange} />
+      <Selectors selectedTime={selectedTime} onChangeTime={handleToggle} />
       <FloatingIcon />
     </Container>
   );

@@ -6,18 +6,12 @@ import Switch from "@mui/material/Switch";
 import { RANGE_LIST, timeTable } from "./timeGenerator";
 import { getTimeInYYMM } from "./timeUtils";
 
-export const Selectors = () => {
-  const [selectedTime, setSelectedTime] = useState(timeTable);
+interface Props {
+  selectedTime: typeof timeTable;
+  onChangeTime: (time: string) => void;
+}
 
-  const handleToggle = (endTime: string) => {
-    const newEntry = {
-      id: selectedTime[endTime].id,
-      isSelected: !selectedTime[endTime].isSelected,
-    };
-
-    setSelectedTime({ ...selectedTime, [endTime]: newEntry });
-  };
-
+export const Selectors: FC<Props> = ({ selectedTime, onChangeTime }) => {
   return (
     <List>
       {RANGE_LIST.map(([start, end]) => {
@@ -31,7 +25,7 @@ export const Selectors = () => {
                   size="small"
                   checked={selectedTime[endTime].isSelected}
                   onChange={() => {
-                    handleToggle(endTime);
+                    onChangeTime(endTime);
                   }}
                 />
                 <Typography>on</Typography>
