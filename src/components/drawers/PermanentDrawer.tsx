@@ -21,7 +21,7 @@ export const PermanentDrawer: React.FC<Props> = () => {
       <Drawer
         variant="permanent"
         sx={{
-          ".css-12i7wg6-MuiPaper-root-MuiDrawer-paper": {
+          "& .MuiDrawer-paper": {
             position: "relative",
             height: "100vh",
           },
