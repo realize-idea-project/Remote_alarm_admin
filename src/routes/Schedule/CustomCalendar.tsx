@@ -28,7 +28,7 @@ export const CustomCalendar: FC<Props> = ({
   open,
 }) => {
   if (_.isNil(currentDate)) return null;
-  console.log("open", open);
+
   return (
     <div>
       <Accordion sx={{ marginTop: 1 }} expanded={open || undefined}>
@@ -42,8 +42,8 @@ export const CustomCalendar: FC<Props> = ({
             "&.Mui-expanded": {
               minHeight: 0,
             },
-            ".css-o4b71y-MuiAccordionSummary-content.Mui-expanded": {
-              margin: "12px 0",
+            "& .MuiAccordionSummary-content.Mui-expanded": {
+              margin: "20px 0 12px 0",
             },
           }}
         >
