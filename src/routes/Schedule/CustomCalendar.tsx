@@ -28,7 +28,7 @@ export const CustomCalendar: FC<Props> = ({
   open,
 }) => {
   if (_.isNil(currentDate)) return null;
-  console.log("open", open);
+
   return (
     <div>
       <Accordion sx={{ marginTop: 1 }} expanded={open || undefined}>
@@ -42,8 +42,8 @@ export const CustomCalendar: FC<Props> = ({
             "&.Mui-expanded": {
               minHeight: 0,
             },
-            ".css-o4b71y-MuiAccordionSummary-content.Mui-expanded": {
-              margin: "12px 0",
+            "& .MuiAccordionSummary-content.Mui-expanded": {
+              margin: "20px 0 12px 0",
             },
           }}
         >
@@ -82,27 +82,13 @@ export const CustomCalendar: FC<Props> = ({
                   width: "60vw",
                   maxWidth: 1000,
                 },
-                border: "none",
-                ".css-167fx6q-MuiButtonBase-root-MuiPickersDay-root.Mui-selected":
-                  {
-                    // borderRadius: "100px",
-                  },
-                ".css-1kpro0o-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)":
-                  {
-                    border: "none",
-                  },
-
-                ".css-1cafy48-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition":
-                  {
-                    minHeight: 220,
-                  },
-                ".css-2jurxj-MuiDayCalendar-slideTransition": {
+                "& .MuiDayCalendar-slideTransition": {
                   minHeight: 210,
                 },
-                ".css-nk89i7-MuiPickersCalendarHeader-root": {
+                "& .MuiPickersCalendarHeader-root": {
                   marginTop: "8px",
                 },
-                ".css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
+                "& .MuiDayCalendar-weekDayLabel": {
                   width: "15vw",
                   maxHeight: "50px",
                 },
@@ -142,6 +128,15 @@ const Day = (
         color: getColor(day),
         width: "15vw",
         maxHeight: "50px",
+        "&:not(.Mui-selected)": {
+          border: "none",
+        },
+        "&.Mui-selected": {
+          borderRadius: "100px",
+        },
+        "&.Mui-selected:hover": {
+          borderRadius: "100px",
+        },
       }}
       {...other}
     />

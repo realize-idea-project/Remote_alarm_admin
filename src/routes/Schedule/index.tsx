@@ -50,8 +50,8 @@ export const Schedule = () => {
     setSelectedTime({ ...selectedTime, [endTime]: newEntry });
   };
 
-  const toggleAll = () => {
-    const iniTable = refreshSchedule(selectedTime, true);
+  const toggleAll = (isSelect: boolean) => {
+    const iniTable = refreshSchedule(selectedTime, isSelect);
     setSelectedTime(iniTable);
   };
 
