@@ -8,16 +8,23 @@ import { Typography } from "@mui/material";
 
 interface Props {
   onClick: () => void;
-  onClickAll: () => void;
+  onClickAll: (isSelect: boolean) => void;
   type: "icon" | "text";
 }
 
 export const FloatingIcon: FC<Props> = ({ onClick, type, onClickAll }) => {
+  const [isAllSelect, setIsAllSelect] = useState(true);
+
   const handleClick = () => {
     const accepted = confirm("알림을 갱신하겠습니까?");
     if (accepted) {
       onClick();
     }
+  };
+
+  const handleClickAll = () => {
+    onClickAll(isAllSelect);
+    setIsAllSelect(!isAllSelect);
   };
 
   if (type === "text") {
@@ -32,7 +39,6 @@ export const FloatingIcon: FC<Props> = ({ onClick, type, onClickAll }) => {
           }}
         >
           <Fab
-            // size="large"
             color="info"
             aria-label="add"
             onClick={handleClick}
@@ -53,16 +59,17 @@ export const FloatingIcon: FC<Props> = ({ onClick, type, onClickAll }) => {
           }}
         >
           <Fab
-            // size="large"
             color="info"
             aria-label="add"
-            onClick={onClickAll}
+            onClick={handleClickAll}
             variant="extended"
             sx={{ padding: "0 30px" }}
           >
             <DoneAllIcon sx={{ fontSize: "2rem" }} />
             <div style={{ width: "10px" }} />
-            <Typography sx={{ fontSize: "1rem" }}>전체선택</Typography>
+            <Typography sx={{ fontSize: "1rem" }}>
+              {isAllSelect ? "전체선택" : "전체취소"}
+            </Typography>
           </Fab>
         </div>
       </>
@@ -79,10 +86,18 @@ export const FloatingIcon: FC<Props> = ({ onClick, type, onClickAll }) => {
         </Fab>
       </div>
       <div
-        style={{ position: "fixed", bottom: "70px", right: 10, zIndex: 500 }}
+        style={{ position: "fixed", bottom: "65px", right: 10, zIndex: 500 }}
       >
-        <Fab size="small" color="info" aria-label="add" onClick={onClickAll}>
-          <Typography sx={{ fontSize: "0.7rem" }}>전체선택</Typography>
+        <Fab
+          size="small"
+          color="info"
+          aria-label="add"
+          onClick={handleClickAll}
+        >
+          <Typography sx={{ fontSize: "0.65rem" }}>
+            {" "}
+            {isAllSelect ? "전체선택" : "전체취소"}
+          </Typography>
         </Fab>
       </div>
     </>
