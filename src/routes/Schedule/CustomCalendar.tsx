@@ -40,7 +40,7 @@ export const CustomCalendar: FC<Props> = ({
             borderBottom: open ? "1px solid lightgray" : "none",
             cursor: open ? "none" : "pointer",
             "&.Mui-expanded": {
-              minHeight: 0,
+              // minHeight: 0,
             },
             "& .MuiAccordionSummary-content.Mui-expanded": {
               margin: "20px 0 12px 0",
@@ -82,19 +82,9 @@ export const CustomCalendar: FC<Props> = ({
                   width: "60vw",
                   maxWidth: 1000,
                 },
-                border: "none",
-                ".css-167fx6q-MuiButtonBase-root-MuiPickersDay-root.Mui-selected":
-                  {
-                    // borderRadius: "100px",
-                  },
-                ".css-1kpro0o-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)":
-                  {
-                    border: "none",
-                  },
-
                 ".css-1cafy48-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition":
                   {
-                    minHeight: 220,
+                    minHeight: 230,
                   },
                 ".css-2jurxj-MuiDayCalendar-slideTransition": {
                   minHeight: 210,
@@ -142,6 +132,15 @@ const Day = (
         color: getColor(day),
         width: "15vw",
         maxHeight: "50px",
+        "&:not(.Mui-selected)": {
+          border: "none",
+        },
+        "&.Mui-selected": {
+          borderRadius: "100px",
+        },
+        "&.Mui-selected:hover": {
+          borderRadius: "100px",
+        },
       }}
       {...other}
     />
