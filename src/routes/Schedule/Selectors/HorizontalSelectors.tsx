@@ -20,7 +20,7 @@ export const HorizontalSelectors: FC<Props> = ({
         display: "flex",
         flexWrap: "wrap",
         marginTop: "20px",
-        paddingBottom: "50px",
+        paddingBottom: "80px",
       }}
     >
       {RANGE_LIST.map(([start, end]) => {
